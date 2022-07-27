@@ -1,4 +1,4 @@
-name: 'Pynt-Newman-GitHub-Action'
+name: 'Pynt Newman GitHub Action'
 description: 'Pynt API Security Tests'
 inputs:
   base-path:
