@@ -10,6 +10,7 @@ Do you test your cloud app with Newman? now you can easily test for common API S
 
 You can use Pynt in the same way you use Newman, with Pynt you get both the functional and the security test results.
 
+For using Pynt API Security Testing using Docker, view https://github.com/pynt-io/pynt for more details.
 
 ## Prerequisites:
 
