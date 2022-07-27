@@ -1,5 +1,9 @@
 name: 'Pynt Newman GitHub Action'
 description: 'Pynt API Security Tests'
+author: 'Pynt.io'
+branding:
+  icon: 'check-circle'
+  color: 'blue'
 inputs:
   base-path:
     description: 'Path for Postman collection/environment files.'
