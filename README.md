@@ -1,6 +1,6 @@
 # Pynt Newman GitHub Action
 
-![pynt-logo](https://user-images.githubusercontent.com/107360829/176185125-b2b9fce3-c9fc-4048-baa5-e5a21af5c31b.png)
+![Pynt logo 01b](https://user-images.githubusercontent.com/107360829/192101937-69d13fc8-f0f0-4e03-81f6-464fa5394115.png)
 
 ## Description:
 
