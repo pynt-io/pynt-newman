@@ -15,7 +15,7 @@ inputs:
     default: 'collection.postman_collection.json'
   postman-environment-filename:
     description: 'Postman environment file name (should exist under "base-path").'
-    required: true
+    required: false
     default: 'environment.postman_environment.json'
 outputs:
   api-security-test-results:
@@ -28,4 +28,7 @@ runs:
       shell: bash
       run: |
         docker pull ghcr.io/pynt-io/pynt:latest
-        docker run -v "${{ inputs.base-path }}":/etc/pynt/ --rm --network="host"  ghcr.io/pynt-io/pynt:latest -c "${{ inputs.postman-collection-filename }}" -e "${{ inputs.postman-environment-filename }}"
+        docker run -v "${{ inputs.base-path }}":/etc/pynt/ --rm --network="host"  ghcr.io/pynt-io/pynt:latest -c "${{ inputs.postman-collection-filename }}" -e "${{ inputs.postman-environment-filename }}" -r
+    
+        echo '${{ toJSON(github) }}'
+        echo '${{ toJSON(runner) }}'
