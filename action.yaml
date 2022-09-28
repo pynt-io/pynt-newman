@@ -28,5 +28,5 @@ runs:
       shell: bash
       run: |
         docker pull ghcr.io/pynt-io/pynt:latest
-        docker run -v "${{ inputs.base-path }}":/etc/pynt/ --rm --network="host"  ghcr.io/pynt-io/pynt:latest -c "${{ inputs.postman-collection-filename }}" -e "${{ inputs.postman-environment-filename }}" -r --no-upload-logs
+        docker run -v "${{ inputs.base-path }}":/etc/pynt/ --env-file "${{ toJson(github) }}" --rm --network="host"  ghcr.io/pynt-io/pynt:latest -c "${{ inputs.postman-collection-filename }}" -e "${{ inputs.postman-environment-filename }}" -r --no-upload-logs
 
