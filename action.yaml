@@ -27,7 +27,7 @@ runs:
     - id: run_latest_pynt
       shell: bash
       run: |
-        cat ${{ fromJson(github) }} >> context.json
+        cat ${{ fromJson(github) }} > context.json
         cat context.json
         docker pull ghcr.io/pynt-io/pynt:latest
         docker run -v "${{ inputs.base-path }}":/etc/pynt/ --rm --network="host"  ghcr.io/pynt-io/pynt:latest -c "${{ inputs.postman-collection-filename }}" -e "${{ inputs.postman-environment-filename }}" -r --no-upload-logs
