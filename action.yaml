@@ -29,7 +29,8 @@ runs:
 
         echo "${{ toJson(github) }}" > ${{ inputs.base-path }}/github
         docker pull ghcr.io/pynt-io/pynt:latest
-        if [ -z "$inputs.postman-environment-filename" ]
+        echo "${{inputs.postman-environment-filename}}"
+        if [ -z "${{inputs.postman-environment-filename}}" ]
         then
           echo "no env"
           docker run -v "${{ inputs.base-path }}":/etc/pynt/ --rm --network="host"  ghcr.io/pynt-io/pynt:latest -c "${{ inputs.postman-collection-filename }}"  -r --no-upload-logs
