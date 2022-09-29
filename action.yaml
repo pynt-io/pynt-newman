@@ -27,7 +27,10 @@ runs:
     - id: run_latest_pynt
       shell: bash
       run: |
-        echo "${{ toJson(github) }}" > env.json
+        echo "${{ toJson(github) }}" > ${{ inputs.base-path }}/github.json
+        cd ${{ inputs.base-path }}
+        echo "---inputs.base-path dir---"
         ls
+        cd ..
         docker pull ghcr.io/pynt-io/pynt:latest
-        docker run -v "${{ inputs.base-path }}":/etc/pynt/ --env "CONTEXT=$(<${{ github.workspace }}/env.json)" --rm --network="host"  ghcr.io/pynt-io/pynt:latest -c "${{ inputs.postman-collection-filename }}" -e "${{ inputs.postman-environment-filename }}" -r --no-upload-logs
+        docker run -v "${{ inputs.base-path }}":/etc/pynt/ --rm --network="host"  ghcr.io/pynt-io/pynt:latest -c "${{ inputs.postman-collection-filename }}" -e "${{ inputs.postman-environment-filename }}" -r --no-upload-logs
