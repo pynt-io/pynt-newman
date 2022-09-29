@@ -23,7 +23,7 @@ inputs:
 outputs:
   api-security-test-results:
     description: "placeholder"
-    value: 0
+    value: 1
 
 runs:
   using: "composite"
