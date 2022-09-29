@@ -4,9 +4,10 @@ author: 'Pynt.io'
 branding:
   icon: 'check-circle'
   color: 'blue'
+
 inputs:
   base-path:
-    description: 'Path for where Postman collection/environment files exist.'
+    description: 'Path where Postman collection/environment files exist.'
     required: true
   postman-collection-filename:
     description: 'Postman collection file name (should exist under "base-path").'
@@ -14,10 +15,16 @@ inputs:
   postman-environment-filename:
     description: 'Postman environment file name (should exist under "base-path").'
     required: false
+  fail_workflow:
+    description: 'Choose whether to fail the workflow if Pynt security tests return findings. Default: false'
+    required: false
+    default: "false"
+
 outputs:
   api-security-test-results:
     description: "placeholder"
     value: 0
+
 runs:
   using: "composite"
   steps:
@@ -29,14 +36,12 @@ runs:
 
         echo "${{ toJson(github) }}" > ${{ inputs.base-path }}/github
         docker pull ghcr.io/pynt-io/pynt:latest
-        echo "${{inputs.postman-environment-filename}}"
+        
         if [ -z "${{inputs.postman-environment-filename}}" ]
         then
-          echo "no env"
           docker run -v "${{ inputs.base-path }}":/etc/pynt/ --rm --network="host"  ghcr.io/pynt-io/pynt:latest -c "${{ inputs.postman-collection-filename }}"  -r --no-upload-logs
-          echo "done with no env"
         else
-          echo "with env"
           docker run -v "${{ inputs.base-path }}":/etc/pynt/ --rm --network="host"  ghcr.io/pynt-io/pynt:latest -c "${{ inputs.postman-collection-filename }}" -e "${{ inputs.postman-environment-filename }}" -r --no-upload-logs
-          echo "done with with env"
         fi
+
+        if [ "${{inputs.fail_workflow}}" == "true" ] && test -f ${{ inputs.base-path }}/results/results.json; then echo "should fail"; fi
