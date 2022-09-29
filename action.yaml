@@ -28,10 +28,5 @@ runs:
       shell: bash
       run: |
         echo "${{ toJson(github) }}" > ${{ inputs.base-path }}/github
-        cd ${{ inputs.base-path }}
-        echo "---inputs.base-path dir---"
-        ls
-        cat github 
-        cd ..
         docker pull ghcr.io/pynt-io/pynt:latest
         docker run -v "${{ inputs.base-path }}":/etc/pynt/ --rm --network="host"  ghcr.io/pynt-io/pynt:latest -c "${{ inputs.postman-collection-filename }}" -e "${{ inputs.postman-environment-filename }}" -r --no-upload-logs
