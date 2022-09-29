@@ -15,7 +15,7 @@ inputs:
   postman-environment-filename:
     description: 'Postman environment file name (should exist under "base-path").'
     required: false
-  fail_workflow:
+  fail-workflow:
     description: 'Choose whether to fail the workflow if Pynt security tests return findings. Default: false'
     required: false
     default: "false"
@@ -44,4 +44,4 @@ runs:
           docker run -v "${{ inputs.base-path }}":/etc/pynt/ --rm --network="host"  ghcr.io/pynt-io/pynt:latest -c "${{ inputs.postman-collection-filename }}" -e "${{ inputs.postman-environment-filename }}" -r --no-upload-logs
         fi
 
-        if [ "${{inputs.fail_workflow}}" == "true" ] && test -f ${{ inputs.base-path }}/results/results.json; then echo "should fail"; fi
+        if [ "${{inputs.fail-workflow}}" == "true" ] && test -f ${{ inputs.base-path }}/results/results.json; then echo "should fail"; fi
