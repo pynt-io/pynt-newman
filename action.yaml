@@ -12,11 +12,11 @@ inputs:
   postman-collection-filename:
     description: 'Postman collection file name (should exist under "base-path").'
     required: true
-    default: 'collection.postman_collection.json'
+  #default: 'collection.postman_collection.json'
   postman-environment-filename:
     description: 'Postman environment file name (should exist under "base-path").'
     required: false
-    default: 'environment.postman_environment.json'
+  #default: 'environment.postman_environment.json'
 outputs:
   api-security-test-results:
     description: "placeholder"
@@ -29,4 +29,9 @@ runs:
       run: |
         echo "${{ toJson(github) }}" > ${{ inputs.base-path }}/github
         docker pull ghcr.io/pynt-io/pynt:latest
-        docker run -v "${{ inputs.base-path }}":/etc/pynt/ --rm --network="host"  ghcr.io/pynt-io/pynt:latest -c "${{ inputs.postman-collection-filename }}" -e "${{ inputs.postman-environment-filename }}" -r --no-upload-logs
+        if [-z "$postman-environment-filename" ]
+        then
+          docker run -v "${{ inputs.base-path }}":/etc/pynt/ --rm --network="host"  ghcr.io/pynt-io/pynt:latest -c "${{ inputs.postman-collection-filename }}" -e "${{ inputs.postman-environment-filename }}" -r --no-upload-logs
+        else
+          docker run -v "${{ inputs.base-path }}":/etc/pynt/ --rm --network="host"  ghcr.io/pynt-io/pynt:latest -c "${{ inputs.postman-collection-filename }}" -r --no-upload-logs
+        fi
