@@ -6,7 +6,7 @@ branding:
   color: 'blue'
 inputs:
   base-path:
-    description: 'Path for Postman collection/environment files.'
+    description: 'Path for where Postman collection/environment files exist.'
     required: true
     default: './'
   postman-collection-filename:
@@ -25,6 +25,9 @@ runs:
     - id: run_latest_pynt
       shell: bash
       run: |
+        [[ "${{ inputs.base-path }}" ]] || { echo "base-path input is empty" ; exit 1; }
+        [[ "${{ inputs.postman-collection-filename }}" ]] || { echo "postman-collection-filename input is empty" ; exit 1; }
+        
         echo "${{ toJson(github) }}" > ${{ inputs.base-path }}/github
         docker pull ghcr.io/pynt-io/pynt:latest
         if [-z "$postman-environment-filename" ]
