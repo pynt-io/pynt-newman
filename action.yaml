@@ -12,11 +12,9 @@ inputs:
   postman-collection-filename:
     description: 'Postman collection file name (should exist under "base-path").'
     required: true
-  #default: 'collection.postman_collection.json'
   postman-environment-filename:
     description: 'Postman environment file name (should exist under "base-path").'
     required: false
-  #default: 'environment.postman_environment.json'
 outputs:
   api-security-test-results:
     description: "placeholder"
