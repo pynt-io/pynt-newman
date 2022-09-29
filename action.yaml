@@ -20,11 +20,6 @@ inputs:
     required: false
     default: "false"
 
-outputs:
-  api-security-test-results:
-    description: "placeholder"
-    value: 1
-
 runs:
   using: "composite"
   steps:
@@ -44,4 +39,4 @@ runs:
           docker run -v "${{ inputs.base-path }}":/etc/pynt/ --rm --network="host"  ghcr.io/pynt-io/pynt:latest -c "${{ inputs.postman-collection-filename }}" -e "${{ inputs.postman-environment-filename }}" -r --no-upload-logs
         fi
 
-        if [ "${{inputs.fail-workflow}}" == "true" ] && test -f ${{ inputs.base-path }}/results/results.json; then echo "::set-output name=api-security-test-results::1" ; fi
+        if [ "${{inputs.fail-workflow}}" == "true" ] && test -f ${{ inputs.base-path }}/results/results.json; then exit 1 ; fi
