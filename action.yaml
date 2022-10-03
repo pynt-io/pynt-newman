@@ -13,7 +13,7 @@ inputs:
     description: 'Postman collection file name (should exist under "base-path").'
     required: true
   postman-environment-filename:
-    description: 'Postman environment file name (should exist under "base-path").'
+    description: 'Postman environment file name, if needed (should exist under "base-path").'
     required: false
   fail-workflow:
     description: 'Choose whether to fail the workflow if Pynt security tests return findings. Default: false'
