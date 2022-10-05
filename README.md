@@ -6,7 +6,7 @@
 
 ## Description:
 
-Pynt is an API Security testing solution built on top of Newman - a Postman collection runner.
+Pynt is a **free API Security testing solution** built on top of Newman - a Postman collection runner.
 
 Do you test your cloud app with Newman? now you can easily test for common API Security issues with the GitHub actions.
 
