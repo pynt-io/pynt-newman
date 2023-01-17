@@ -24,16 +24,17 @@ For using Pynt API Security Testing using Docker, view https://github.com/pynt-i
 Add the following task to your GitHub action:
 
       - name: Run Pynt API Security Tests
-        uses: pynt/pynt-newman@latest
+        uses: pynt-io/pynt-newman@latest
         with:
           base-path: '$GITHUB_WORKSPACE'
           postman-collection-filename: 'collection.postman_collection.json'
           postman-environment-filename: 'environment.postman_environment.json'
 
 
-1. Modify "base-path" input to the directory that contains your Postman collection and environment files (leave as is if the Postman files are at your project base path).
-2. Modify "postman-collection-filename" input to your collection file name (assumed to be located under base-path).
-3. Modify "postman-environment-filename" input to your environment file name (assumed to be located under base-path).
+1. Modify "@latest" with latest version of the pynt-newman action (example: @v0.1.2)
+2. Modify "base-path" input to the directory that contains your Postman collection and environment files (leave as is if the Postman files are at your project base path).
+3. Modify "postman-collection-filename" input to your collection file name (assumed to be located under base-path).
+4. Modify "postman-environment-filename" input to your environment file name (assumed to be located under base-path).
 
 ## EULA and Privacy Policy
 
